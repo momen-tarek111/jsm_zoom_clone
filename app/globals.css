@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@tailwind utilities;
+
+@layer utilities{
+  .flex-between{
+    @apply flex items-center justify-between;
+  }
+  .flex-center{
+    @apply flex items-center justify-center;
+  }
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+}
+.bg-dark-1{
+  background-color: #1C1F2E;
+}
+.bg-dark-2{
+  background-color: #161925;
+}
+.bg-blue-1{
+  background-color: #0E78F9;
+}
+.bg-hero{
+  background-image: url('../public/images/hero-background.png');
+}
+.text-sky-1{
+  color: #C9DDFF;
+}
+.bg-orange-1{
+  background-color: #FF742E;
+}
+.bg-purple-1{
+  background-color: #830EF9;
+}
+.bg-yellow-1{
+  background-color: #F9A90E;
+}
+/* ==== clerk class override ===== */
+.cl-providerIcon__github{
+  filter:invert(1);
+}
+.cl-internal-11zqkal:focus {
+    box-shadow: none;
+}
+.cl-userButtonPopoverActionButtonIcon {
+  color: white;
+}
+
+.cl-logoBox {
+  height: 40px;
+}
+.cl-dividerLine {
+  background: #252a41;
+  height: 2px;
+}
+
+.cl-socialButtonsIconButton {
+  border: 3px solid #565761;
+}
+
+.cl-internal-wkkub3 {
+  color: white;
+}
+.cl-userButtonPopoverActionButton {
+  color: white;
+}
