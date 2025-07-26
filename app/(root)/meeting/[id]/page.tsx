@@ -1,10 +1,35 @@
-import React from 'react'
+"use client"
+import Loader from '@/components/Loader';
+import MeetingRoom from '@/components/MeetingRoom';
+import MeetingSetup from '@/components/MeetingSetup';
+import { useGetCallById } from '@/hooks/useGetCallById';
+import { useUser } from '@clerk/nextjs';
+import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
+import { useParams } from 'next/navigation';
+import React, { useState } from 'react'
 
-const Meeting = async(props:unknown) => {
-  const { id } =await (props as { params: { id: string } }).params;
+const MeetingPage = () => {
+  const params = useParams();
+  const id:string = params.id as string;
+  const {user , isLoaded} = useUser();
+  const [isSetupComplete, setIsSetupComplete] = useState(false)
+  const {call,isCallLoading}=useGetCallById(id);
+  if (!isLoaded || isCallLoading) return <Loader/>
   return (
-    <div>Meeting Room : #{id}</div>
+    <main className='w-full h-screen '>
+      <StreamCall call={call}>
+        <StreamTheme>
+          {
+            !isSetupComplete?(
+              <MeetingSetup setIsSetupComplete={setIsSetupComplete}/>
+            ):(
+              <MeetingRoom/>
+            )
+          }
+        </StreamTheme>
+      </StreamCall>
+    </main>
   )
 }
 
-export default Meeting
+export default MeetingPage
