@@ -120,12 +120,12 @@ const MeetingTypeList = () => {
         title="Type the link here"
         className="text-center"
         buttonText="Join Meeting"
-        handleClick={()=>{router.push(new URL('https://',values.link).pathname.slice(1) + (new URL('https://',values.link).search))}}
+        handleClick={()=>{router.push(new URL(values.link).pathname.slice(1) + (new URL(values.link).search));console.log(new URL(values.link))}}
       >
         <Input 
           placeholder='Meeting link' 
           className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0'
-          onChange={(e)=>{setValues({...values,link:e.target.value})}}
+          onChange={(e)=>{setValues({...values,link:'https://' +(e.target.value)})}}
           />
       </MeetingModel>
     </section>
