@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export const useGetCalls = () => {
     const [calls, setCalls] = useState<Call[]>([])
@@ -23,6 +23,7 @@ export const useGetCalls = () => {
                     }
                 });
                 setCalls(calls);
+                console.log(calls)
             } catch (error) {
                 console.log(error)
             } finally {
