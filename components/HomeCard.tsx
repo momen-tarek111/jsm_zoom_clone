@@ -12,7 +12,7 @@ interface HomeCardProps {
 const HomeCard = ({ img, tittle, description, handleClick, className }: HomeCardProps) => {
     return (
         <div 
-            className={cn('px-4 py-6 flex flex-col justify-between w-full xl:max-w-[270px] min-h-[260px] rounded-[14px] cursor-pointer', className)}
+            className={cn('px-4 py-6 flex flex-col justify-between w-full min-h-[260px] rounded-[14px] cursor-pointer', className)}
             onClick={handleClick}
         >
             <div className="flex-center bg-white/30 backdrop-blur-md rounded-[10px] size-12">

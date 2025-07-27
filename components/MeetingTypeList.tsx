@@ -3,10 +3,13 @@
 import HomeCard from './HomeCard';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { lazy, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from "sonner"
 import MeetingModel from './MeetingModel';
+import { Textarea } from './ui/textarea';
+import ReactDatePicker from 'react-datepicker';
+import { Input } from './ui/input';
 
 const MeetingTypeList = () => {
   const [meetingState, setMeetingState] = useState<'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined>();
@@ -19,8 +22,8 @@ const MeetingTypeList = () => {
   });
   const { user } = useUser();
   const client = useStreamVideoClient();
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
   const createMeeting = async () => {
-    
     if (!user || !client) return;
     try {
       if (!values.dateTime) {
@@ -44,8 +47,7 @@ const MeetingTypeList = () => {
       if (!values.description) {
         router.push(`/meeting/${id}`);
       }
-      
-      toast('Meeting Created');
+
     } catch (error) {
       console.log("Error creating meeting:", error);
       toast("Failed to create meeting")
@@ -57,6 +59,51 @@ const MeetingTypeList = () => {
       <HomeCard img="/icons/join-meeting.svg" tittle="Join Meeting" description="via invitation link" handleClick={() => setMeetingState('isJoiningMeeting')} className="bg-blue-1" />
       <HomeCard img="/icons/schedule.svg" tittle="Schedule Meeting" description="Plan your meeting" handleClick={() => setMeetingState('isScheduleMeeting')} className="bg-purple-1" />
       <HomeCard img="/icons/recordings.svg" tittle="View Recordings" description="Meeting recordings" handleClick={() => router.push("/recordings")} className="bg-yellow-1" />
+      {
+        !callDetails ? (
+          <MeetingModel
+            isOpen={meetingState === 'isScheduleMeeting'}
+            onClose={() => setMeetingState(undefined)}
+            title="Create Meeting"
+            handleClick={createMeeting}
+          >
+            <div className='flex flex-col gap-2.5'>
+              <label className='text-base font-normal leading-[22px] text-sky-2'>Add a description</label>
+              <Textarea className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0'
+                onChange={(e) => { setValues({ ...values, description: e.target.value }) }}
+              />
+            </div>
+            <div className='flex flex-col gap-2.5'>
+              <label className='text-base font-normal leading-[22px] text-sky-2'>Select Date and Time</label>
+              <ReactDatePicker
+                selected={values.dateTime}
+                onChange={(date) => { setValues({ ...values, dateTime: date! }) }}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                timeCaption="time"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                className="w-full rounded bg-dark-3 p-2 focus:outline-none bg-dark-1"
+              />
+            </div>
+          </MeetingModel>
+        ) :
+          (
+            <MeetingModel
+              isOpen={meetingState === 'isScheduleMeeting'}
+              onClose={() => setMeetingState(undefined)}
+              title="Meeting Created"
+              className="text-center"
+              buttonText="Copy Meeting Link"
+              handleClick={() => {
+                navigator.clipboard.writeText(meetingLink)
+                toast('Meeting Created');
+              }}
+              image='/icons/checked.svg'
+              buttonIcon='/icons/copy.svg'
+            />
+          )
+      }
       <MeetingModel
         isOpen={meetingState === 'isInstantMeeting'}
         onClose={() => setMeetingState(undefined)}
@@ -66,6 +113,21 @@ const MeetingTypeList = () => {
         handleClick={createMeeting}
 
       />
+
+      <MeetingModel
+        isOpen={meetingState ==="isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={()=>{router.push(values.link);console.log(values.link)}}
+      >
+        <Input 
+          placeholder='Meeting link' 
+          className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0'
+          onChange={(e)=>{setValues({...values,link:e.target.value})}}
+          />
+      </MeetingModel>
     </section>
   )
 }

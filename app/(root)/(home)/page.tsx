@@ -11,8 +11,8 @@ const Home = () => {
   return (
     <section className=' flex flex-col text-white size-full gap-10'>
       <div className='h-[300px] w-full rounded-[20px] bg-hero bg-cover'>
-        <div className='flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11'>
-          <h2 className='bg-white/30 backdrop-blur-md rounded p-4 max-w-[270px] py-2 text-center text-base font-normal'>
+        <div className='flex h-full flex-col justify-between max-md:px-5 max-md:py-8 px-5 py-8 lg:p-11'>
+          <h2 className='bg-white/30 backdrop-blur-md rounded p-4 max-w-[280px] py-2 text-center text-base font-normal'>
             Upcoming Meeting at:12:30 PM
           </h2>
           <div className='flex flex-col gap-2'>

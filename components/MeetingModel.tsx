@@ -7,7 +7,7 @@ import {
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
-interface MeetingModelProps {
+interface MeetingModelProps{
     isOpen: boolean;
     onClose: () => void;
     title: string;

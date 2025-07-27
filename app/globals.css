@@ -21,6 +21,12 @@
 .bg-dark-2{
   background-color: #161925;
 }
+.bg-dark-3{
+  background-color: #252A41;
+}
+.bg-dark-4{
+  background-color: #1E2757;
+}
 .bg-blue-1{
   background-color: #0E78F9;
 }
@@ -30,6 +36,12 @@
 .text-sky-1{
   color: #C9DDFF;
 }
+.text-sky-2{
+  color: #ECF0FF;
+}
+.text-sky-3{
+  color: #F5FCFF;
+}
 .bg-orange-1{
   background-color: #FF742E;
 }
@@ -38,6 +50,18 @@
 }
 .bg-yellow-1{
   background-color: #F9A90E;
+}
+.border-dark-1{
+  border-color: #1C1F2E;
+}
+.border-dark-3{
+  border-color: #252A41;
+}
+.show-block {
+  width: 100%;
+  max-width: 350px;
+  display: block;
+  animation: show 0.7s forwards linear;
 }
 /* ==== clerk class override ===== */
 .cl-providerIcon__github{
@@ -67,4 +91,32 @@
 }
 .cl-userButtonPopoverActionButton {
   color: white;
+}
+
+.str-video__participant-listing-item .str-video__participant-listing-item__display-name{
+  overflow-x: hidden !important;
+}
+@media (max-width: 1780px) {
+  .str-video__menu-container {
+    left: 20% !important;
+    max-width: 60% !important;
+  }
+}
+@media (max-width: 1280px) {
+  .str-video__menu-container {
+    left: 10% !important;
+    max-width: 80% !important;
+  }
+}
+@media (max-width: 768px) {
+  .str-video__menu-container {
+    left: 5% !important;
+    max-width: 90% !important;
+  }
+}
+@media (max-width: 480px) {
+  .str-video__menu-container {
+    left: 2% !important;
+    max-width: 96% !important;
+  }
 }

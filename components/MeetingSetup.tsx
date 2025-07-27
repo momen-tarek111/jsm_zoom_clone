@@ -1,3 +1,4 @@
+"use client"
 import { DeviceSettings, useCall, VideoPreview } from '@stream-io/video-react-sdk'
 import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button'
@@ -5,6 +6,7 @@ import { Button } from './ui/button'
 const MeetingSetup = ({setIsSetupComplete}:{setIsSetupComplete:(value:boolean)=>void}) => {
     const [isMicCamSetup, setIsMicCamSetup] = useState(false)
     const call = useCall()
+    console.log(call)
     if (!call) {
         throw new Error(
             'useStreamCall must be used within a StreamCall component.',
