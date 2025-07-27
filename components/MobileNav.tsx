@@ -62,7 +62,6 @@ const MobileNav = () => {
                                                         width={24}
                                                         height={24}
                                                         priority
-                                                        className="w-fit"
                                                     />
                                                     <p className=' font-semibold'>
                                                         {link.label}
